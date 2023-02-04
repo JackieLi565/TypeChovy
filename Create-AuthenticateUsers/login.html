@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Nunito:wght@200&family=Roboto:wght@100;400;700&family=Source+Sans+Pro:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Nunito:wght@200&family=Oswald&family=Roboto:wght@100;400;700&family=Source+Sans+Pro:ital,wght@1,600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-in</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <div class="logo">
+                <img src="../images/fishy.png" alt="Fishy-type logo">
+            </div>
+            <div class="hidden-error">
+                <div class="error">
+                    Email or password is incorrect
+                </div>
+            </div>
+            <div class="inputs">
+                <div class="signin-email-container">
+                    <img src="../images/email.png" alt="email-icon">
+                    <input class="signin-email" type="text" placeholder="email"> <br>
+                </div>
+                <div class="signin-password-container">
+                    <img src="../images/lock.png" alt="password-icon">
+                    <input class="signin-password" type="text" type="text" placeholder="password"> <br>
+                </div>
+            </div>
+            <div class="forgot">
+                <a href="">Forgot your password?</a>
+            </div>
+            <div class="sign-in-container">
+                <button class="sign-in">SIGN IN</button>
+            </div>
+            <br>
+            <div class="hr-container">
+                <hr><span>OR</span><hr>
+            </div>
+            <br>
+            <div class="github-container">
+                <p>Sign in with GitHub</p>
+                <img src="../images/github.png" alt="">
+            </div>
+            <br>
+            <div class="signup-container">
+                Don't have an account? &nbsp;<a href="./signup.html">Sign up</a>!
+            </div>
+        </div>
+    </div>
+</body>
+<script type="module" src="./login_auth.js"></script>
+</html>

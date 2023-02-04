@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    height: 100vh;
+    background-color: #191a1b;
+}
+
+body, .quote-input {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.nav-bar {
+    padding: 0rem 3rem 0rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2b2d31;
+    width: 100%;
+    height: 9vh;
+    position: absolute;
+}
+
+.logo {
+    color: #3e6c81;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+.nav-container {
+    display: flex;
+    width: 25vh;
+    justify-content: space-evenly;
+}
+
+.nav-container > div {
+    color: white;
+}
+
+.container {
+    background-color: transparent;
+    padding: 1rem;
+    border-radius: .5rem;
+    width: 900px;
+    max-width: 90%;
+    height: auto;
+    position: relative;
+}
+
+.timer {
+    display: none;
+    font-size: 2.5rem;
+    top: -40px;
+    width: 95%;
+    text-align: right;
+    position: absolute;
+    color: #63a9cabd;
+    font-weight: 500;
+}
+
+.quote-display {
+    margin-bottom: 1rem;
+    margin-left: calc(1rem - 2px);
+    margin-right: calc(1rem - 2px);
+    color: rgba(255, 255, 255, 0.384);
+    font-size: 1.9rem;
+    user-select: none;
+}
+
+.quote-input {
+    background-color: rgba(255, 255, 255, 0.116);
+    cursor: pointer;
+    border: 1px solid #191a1b;
+    outline: none;
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 20px;
+    margin: auto;
+    resize: none;
+    color: transparent;
+    padding: .5rem 1rem;
+    transition: all 0.25s;
+    text-decoration: none !important;
+    user-select: none;
+}
+
+.quote-input:focus{
+    background-color: transparent;
+    text-decoration: none !important;
+    width: 0px;
+}
+
+.focus {
+    top: 50%;
+    right: 29.5%;
+    position: absolute;
+    display: none;
+}
+
+.correct {
+    color: #63aaca;;
+}
+
+.incorrect {
+    color: rgba(255, 0, 0, 0.664);
+}
+
+.logo-container {
+    column-gap: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fa-hover:hover {
+    color: rgba(255, 255, 255, 0.63);
+}
+
+.fa-hover-blue:hover {
+    color: #63aaca;
+}
+
+a {
+    color: rgba(255, 255, 255, 0.397);
+    cursor: pointer;
+}
+
+#restart {
+    top: 100%;
+    right: 49%;
+    position: absolute;
+}
