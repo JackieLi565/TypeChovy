@@ -44,7 +44,7 @@ input.addEventListener('input', () => {
     
 })
 
-//signout user
+//signout 
 sign_out.addEventListener('click', () => {
     signOut(auth).then(() => {
         window.location.href = "../Create-AuthenticateUsers/login.html"
