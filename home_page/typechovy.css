@@ -52,26 +52,72 @@ body, .quote-input {
     max-width: 90%;
     height: auto;
     position: relative;
+    display: block;
+}
+
+.scoreboard {
+    display: none;
+    justify-content: space-evenly;
+    background-color: transparent;
+    padding: 1rem;
+    border-radius: .5rem;
+    width: 900px;
+    max-width: 90%;
+    height: 200px;
+    position: relative;
+}
+
+.scoreboard > div {
+    cursor: pointer;
+    background-color: #3e6c81;
+    width: 150px;
+    height: 150px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: rgba(240, 248, 255, 0.637);
+    transition: all 0.2s;
+    position: relative;
+}
+
+.scoreboard > div:hover {
+    transform: translateY(-5px);  
+    box-shadow: 0 5px 20px 3px rgba(255, 255, 255, 0.151);
+}
+
+.scoreboard > h1 {
+    position: absolute;
+    top: -60px;
+    color: #3e6c81;
 }
 
 .timer {
-    display: none;
     font-size: 2.5rem;
-    top: -40px;
+    top: 10px;
     width: 95%;
+    height: 95%;
     text-align: right;
     position: absolute;
     color: #63a9cabd;
     font-weight: 500;
+    display: none;
+}
+
+.title-score {
+    color: #61697ace;
+    font-size: 1.3rem;
+    top: -30px;
+    position: absolute;
 }
 
 .quote-display {
-    margin-bottom: 1rem;
-    margin-left: calc(1rem - 2px);
-    margin-right: calc(1rem - 2px);
     color: rgba(255, 255, 255, 0.384);
     font-size: 1.9rem;
     user-select: none;
+    margin: 0px calc(1rem - 2px) 1rem calc(1rem - 2px);
 }
 
 .quote-input {
@@ -134,7 +180,19 @@ a {
 }
 
 #restart {
-    top: 100%;
-    right: 49%;
+    top: 66%;
     position: absolute;
 }
+
+.race-speed {
+    padding: 10px;
+    color: rgba(255, 255, 255, 0.384);
+    width: 150px;
+    height: auto;
+    font-size: 1.5rem;
+}
+
+.race-speed > span {
+    cursor: pointer;
+}
+

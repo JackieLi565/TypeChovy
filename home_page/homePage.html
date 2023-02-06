@@ -20,22 +20,41 @@
             <a><i class="fa-solid fa-user fa-hover fa-xl"></i></a>
             <a><i class="fa-solid fa-gear fa-hover fa-xl"></i></a>
             <a class="signout"><i class="fa-solid fa-arrow-right-from-bracket fa-hover fa-xl"></i></a>
-<!--                 <a style="color: rgba(255, 255, 255, 0.397);"></a>
+<!--        <a style="color: rgba(255, 255, 255, 0.397);"></a>
             <a style="color: rgba(255, 255, 255, 0.397);"></a> -->
         </div>
     </nav>
     <div class="wrapper">
         <div class="container">
+            <div class="race-speed">
+                <span class="sixty">60</span>
+                <span class="thirty">30</span>
+                <span class="fifteen">15</span>
+            </div>
             <div class="timer">0</div>
             <div class="quote-display"></div>
             <textarea class="quote-input" autofocus></textarea>
             <h1 class="focus">Click Here to Focus</h1>
-            <a>
-                <i id="restart" class="fa-solid fa-rotate-right fa-hover-blue fa-2x"></i>
-            </a>
         </div>
+        <div class="scoreboard">
+            <h1>Final Score</h1>
+            <div class="wpm">
+                <span class="wpm-score"></span>
+                <span class="title-score">wpm</span>
+            </div>
+            <div class="char">
+                <span class="char-score"></span>
+                <span class="title-score">characters</span>
+            </div>
+            <div class="acc">
+                <span class="acc-score"></span>
+                <span class="title-score">percentage</span>
+            </div>
+        </div>
+        <a id="restart">
+            <i class="fa-solid fa-rotate-right fa-hover-blue fa-2x"></i>
+        </a>
     </div>
-
 </body>
 <script type="module" src="typeracer.js"></script>
 </html>
