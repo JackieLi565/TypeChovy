@@ -1,4 +1,4 @@
-import { signOut, auth, onAuthStateChanged } from "../Create-AuthenticateUsers/API.js";
+import { signOut, auth, onAuthStateChanged, ref, set, onValue, db } from "../Create-AuthenticateUsers/API.js";
 
 const API_url = "http://api.quotable.io/random?minLength=200";
 const display = document.querySelector(".quote-display");
@@ -103,7 +103,6 @@ function showScore(arrayQuote) {
     hideGameContainer();
     scoreboard.style.display = "flex";
     const totalChar = quote.length;
-    const totalWords = quoteWords.length;
 
     arrayQuote.forEach(char => {
         if (char.classList.contains('correct')) {
@@ -121,6 +120,9 @@ function showScore(arrayQuote) {
     } else if (is15) {
         displayResults(correctChar, totalChar, char_display, wpm_display, accuracy_display, wp15s);
     }
+
+    //add points system
+    
 }
 //display the results
 function displayResults (correctChar, totalChar, char_display, wpm_display, accuracy_display, speed) {
@@ -220,6 +222,7 @@ function getCurrentTime() {
     return Math.floor((new Date() - startTime) / 1000) //in seconds
 }
 
+//reset the race
 function resetRace() {    
     showGameContainer();
     hideScore();
@@ -230,4 +233,5 @@ function resetRace() {
     clock.style.display = "none"
     counter = 0;
 }
+
 

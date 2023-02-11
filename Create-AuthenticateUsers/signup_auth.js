@@ -4,7 +4,7 @@ import {
   ref,
   set,
   createUserWithEmailAndPassword
-} from "./API";
+} from "./API.js";
 
 //inputs
 const signup = document.querySelector(".sign-up");
@@ -21,17 +21,18 @@ signup.addEventListener('click', () => {
     if(password_signup !== confirmPassword) {
       console.log("Passwords dont match");
     } else {
-      addUsertoDB(username, username, email_signup)
-      //SignUP(email_signup, password_signup);
+      //addUsertoDB(username, username, email_signup)
+      SignUP(email_signup, password_signup, username);
     }
 
 }) 
 
-function SignUP(email, password) {
+function SignUP(email, password, username) {
   createUserWithEmailAndPassword(auth, email, password).then((user_info) => {
-    console.log(`${user_info.user} joined`)
-    window.location.href = "../home_page/homePage.html";
-  }).catch(error => {
+    addUsertoDB(user_info.user.uid, username, email);
+    alert("User has been added return to the signin page")
+  })
+  .catch(error => {
     console.log("Failed to add user", error)
   })
 }
@@ -45,6 +46,8 @@ function addUsertoDB(userId, username, email) {
     email: email,
     points: 0
   });
+
+  return true;
 }
 
 

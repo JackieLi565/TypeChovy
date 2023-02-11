@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #191a1b;
+    position: relative;
+}
+
+.leaderboard-container {
+    width: 50%;
+    border-radius: 8px;
+    background-color: #2b2d31;
+    height: auto;
+    position: relative;
+    padding: 20px;
+}
+
+.header {
+    color: #3e6c81;
+    top: -45px;
+    width: 100%;
+    font-size: 2.5rem;
+    left: 20;
+}
+
+.top-container {
+    position: absolute;
+    left: 0;
+    top: -45px;
+    display: flex;
+    width: 100%;
+}
+
+.race-speed {
+    top: -45px;
+    text-align: right;
+}
+.race-speed > h2{
+    display: inline;
+}
+
+.standing-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+    width: auto;
+    margin-bottom: 8px;
+    font-size: 1.5rem;
+    position: relative;
+}
+
+.example {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 10px;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.384);
+}
+  
+.position {
+text-align: center;
+}
+
+.username {
+text-align: center;
+}
+
+.wpm {
+text-align: center;
+}
+
+.date {
+text-align: center;
+overflow: none;
+}
+
+.start-typing {
+    position: absolute;
+    right: 49%;
+    bottom: -15%;
+}
