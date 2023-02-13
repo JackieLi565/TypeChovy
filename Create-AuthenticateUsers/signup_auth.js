@@ -21,7 +21,6 @@ signup.addEventListener('click', () => {
     if(password_signup !== confirmPassword) {
       console.log("Passwords dont match");
     } else {
-      //addUsertoDB(username, username, email_signup)
       SignUP(email_signup, password_signup, username);
     }
 
@@ -29,26 +28,23 @@ signup.addEventListener('click', () => {
 
 function SignUP(email, password, username) {
   createUserWithEmailAndPassword(auth, email, password).then((user_info) => {
-    addUsertoDB(user_info.user.uid, username, email);
-    alert("User has been added return to the signin page")
+    const reference = ref(db,'users/' + user_info.user.uid);
+    return set(reference, {
+      username: username,
+      email: email,
+      sixty: [{score: 0, date: 'none'}],
+      thirty: [{score: 0, date: 'none'}],
+      fifteen: [{score: 0, date: 'none'}],
+    });
+  }).then(() => {
+    window.location.href = "../home_page/homePage.html";
   })
   .catch(error => {
     console.log("Failed to add user", error)
   })
 }
 
-function addUsertoDB(userId, username, email) {
-  
-  const reference = ref(db,'users/' + userId);
 
-  set(reference, {
-    username: username,
-    email: email,
-    points: 0
-  });
-
-  return true;
-}
 
 
 

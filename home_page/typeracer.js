@@ -10,11 +10,9 @@ const scoreboard = document.querySelector(".scoreboard");
 const container = document.querySelector(".container");
 
 let startTime;
-let counter = 0;
 let started = true;
 let timerID;
 let quote;
-let quoteWords;
 let correct = true;
 let arrayQuote;
 let clockTime;
@@ -54,16 +52,17 @@ sign_out.addEventListener('click', () => {
 })
 
 //checks user sign in
-auth.onAuthStateChanged(user => {
-    console.log(user)
-})
+function getSessionUser(callback) {
+    auth.onAuthStateChanged(user => {
+        callback(user)
+    })
+}
 
+//get next quote
 reset.addEventListener('click', resetRace);
-
 async function nextQuote() {
     quote = await getQuote();
     display.textContent = ""; //clears and displays new quote
-    quoteWords = quote.split(' ');//gets total amount of words
     quote.split('').forEach(char => {
         const charSpan = document.createElement('span')
         charSpan.textContent = char;//puts char in span
@@ -72,6 +71,7 @@ async function nextQuote() {
     input.value = null;
 }
 
+//compares the characters
 function handleCompareChars(arrayQuote, arrayValue) {
     arrayQuote.forEach((char, index) => {
         const charInput = arrayValue[index];
@@ -92,6 +92,9 @@ function handleCompareChars(arrayQuote, arrayValue) {
     })
 }
 
+let wpm;
+let wp30s;
+let wp15s;
 //show score
 function showScore(arrayQuote) {
     clearInterval(timerID)
@@ -109,21 +112,22 @@ function showScore(arrayQuote) {
             correctChar++;
         }
     })
-    const wpm = (correctChar / 5) / 1;
-    const wp30s = (correctChar / 5) / 0.5;
-    const wp15s = (correctChar / 5) / 0.15;
+    wpm = (correctChar / 5) / 1;
+    wp30s = (correctChar / 5) / 0.5;
+    wp15s = (correctChar / 5) / 0.15;
     
     if (is60) {
+        getSessionUser(getData)
         displayResults(correctChar, totalChar, char_display, wpm_display, accuracy_display, wpm);
     } else if (is30) {
+        getSessionUser(getData)
         displayResults(correctChar, totalChar, char_display, wpm_display, accuracy_display, wp30s);
     } else if (is15) {
+        getSessionUser(getData)
         displayResults(correctChar, totalChar, char_display, wpm_display, accuracy_display, wp15s);
-    }
-
-    //add points system
-    
+    }    
 }
+
 //display the results
 function displayResults (correctChar, totalChar, char_display, wpm_display, accuracy_display, speed) {
     char_display.textContent = `${correctChar} of ${totalChar}`
@@ -131,6 +135,7 @@ function displayResults (correctChar, totalChar, char_display, wpm_display, accu
     accuracy_display.textContent = `${Math.floor((correctChar/totalChar)*100)}%`
 }
 
+//hide score container
 function hideScore() {
     scoreboard.style.display = "none";
 }
@@ -140,6 +145,7 @@ function hideGameContainer() {
     container.style.display = "none";
 }
 
+//show game container
 function showGameContainer() {
     container.style.display = "block";
 }
@@ -159,6 +165,7 @@ time60s.addEventListener('click', setRaceSpeed);
 time30s.addEventListener('click', setRaceSpeed);
 time15s.addEventListener('click', setRaceSpeed);
 
+//set the race speed
 function setRaceSpeed() {
     this.style.color = "#63aaca";
     const fadedColor = "rgba(255, 255, 255, 0.397)";
@@ -231,7 +238,94 @@ function resetRace() {
     started = true;
     clearInterval(timerID)
     clock.style.display = "none"
-    counter = 0;
 }
+
+//get userdata
+function getData(user) {
+    const players = ref(db, 'users/' + user.uid );
+    onValue(players, (snapshot) => { //db ref, callback
+        const data = snapshot.val();
+        updateUserData(data)
+    })
+}
+
+function updateUserData(data) {
+    let sortedArray;
+    let sessionAttempt;
+    if(is60) {
+        sortedArray = sortPlayerScores(data.sixty);
+        sessionAttempt = {date: getDate(), score: Math.floor(wpm)};
+    } else if (is30) {
+        sortedArray = sortPlayerScores(data.thirty);
+        sessionAttempt = {date: getDate(), score: Math.floor(wp30s)};
+    } else {
+        sortedArray = sortPlayerScores(data.fifteen);
+        sessionAttempt = {date: getDate(), score: Math.floor(wp15s)};
+    }
+    const finalData = replaceObject(sessionAttempt, sortedArray)
+    console.log(sortedArray)
+    if(finalData >= 0) {
+       getSessionUser2(updateUserScores, sessionAttempt, finalData)
+    } else {
+        console.log("lower than best")
+    }
+}
+
+function replaceObject(newObject, objectArray) {
+    for (let i = 0; i < objectArray.length; i++) {
+        if (objectArray[i].score < newObject.score) {
+            objectArray[i] = newObject;
+            return i;
+        }
+    }
+    return -1;
+}
+
+function getSessionUser2(callback, attempt, index) {
+    auth.onAuthStateChanged(user => {
+        callback(user, attempt, index)
+    })
+}
+
+function updateUserScores(user, attempt, index) {
+    let reference;
+    if(is60) {
+        reference = ref(db,`users/${user.uid}/sixty/${index}`);
+    }
+    else if (is30) {
+        reference = ref(db,`users/${user.uid}/thirty/${index}`);
+    } else {
+        reference = ref(db,`users/${user.uid}/fifteen/${index}`);
+    }
+    set(reference, {
+        date: attempt.date,
+        score: attempt.score
+    })
+}
+
+//high to low
+function sortPlayerScores(array) {
+    return array.sort((a, b) => b.score - a.score);
+}
+
+function getDate() {
+    const today = new Date();
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const day = today.getUTCDate();
+    const monthName = months[today.getUTCMonth()];
+    const year = today.getUTCFullYear();
+  
+    return (`${day} ${monthName} ${year}`);
+}
+
+
+
+ 
+
+
+
+
+
+
 
 

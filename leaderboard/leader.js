@@ -1,5 +1,9 @@
 import { signOut, auth, onAuthStateChanged, ref, set, onValue, db } from "../Create-AuthenticateUsers/API.js";
 const leaderboardContainer = document.querySelector(".bottom-container");
+//handle speed condition
+const time60s = document.querySelector(".sixty");
+const time30s = document.querySelector(".thirty");
+const time15s = document.querySelector(".fifteen");
 //check
 let is60 = false;
 let is30 = false;
@@ -8,7 +12,7 @@ let is15 = false;
 (function bootUp() {
     is60 = true;
     getData(objectToArray)
-
+    time60s.style.color = "#63aaca";
 })();
 
 const sign_out = document.querySelector(".signout");
@@ -34,29 +38,38 @@ function getData(callback) {
 
 function objectToArray(data) {
     let result = Object.keys(data).map((key) => data[key]);
+    let SortedPlayers, amountOfPlayers;
+    const collection60 = [];
+    const collection30 = [];
+    const collection15 = [];
+    for(const player of result) {
+        collection60.push({score: player.sixty[0], name: player.username});
+        collection30.push({score: player.thirty[0], name: player.username});
+        collection15.push({score: player.fifteen[0], name: player.username});
+    }
     if (is60) {
-        var SortedPlayers = sortData(result, 60);
+        SortedPlayers = sortData(collection60, 60);
     } else if (is30) {
-        var SortedPlayers = sortData(result, 30);
+        SortedPlayers = sortData(collection30, 30);
     } else {
-        var SortedPlayers = sortData(result, 15);
+        SortedPlayers = sortData(collection15, 15);
     }
     if(SortedPlayers.length < 10) {
-        var amountOfPlayers = SortedPlayers.length;
+        amountOfPlayers = SortedPlayers.length;
     } else {
-        var amountOfPlayers = 10;
+        amountOfPlayers = 10;
     }
-
     for(let position = 0; position < amountOfPlayers; position++) {
         let currentPlayer = SortedPlayers[position];
+        console.log(SortedPlayers)
         if(is60) {
-            renderResults(position + 1, currentPlayer.username, currentPlayer.sWpm, getDate()) 
+            renderResults(position + 1, currentPlayer.name, Math.floor(currentPlayer.score.score), getDate()) 
             console.log("render 60")
         } else if (is30) {
-            renderResults(position + 1, currentPlayer.username, currentPlayer.tWpm, getDate()) 
+            renderResults(position + 1, currentPlayer.name, Math.floor(currentPlayer.score.score), getDate()) 
             console.log("render 30")
         } else {
-            renderResults(position + 1, currentPlayer.username, currentPlayer.fWpm, getDate()) 
+            renderResults(position + 1, currentPlayer.name, Math.floor(currentPlayer.score.score), getDate()) 
             console.log("render 15")
         }
     }
@@ -76,11 +89,6 @@ function getDate() {
 function renderResults(position, username, wpm, date) {
     appendStandingHTML(position, username, wpm, date);
 }
-
-//handle speed condition
-const time60s = document.querySelector(".sixty");
-const time30s = document.querySelector(".thirty");
-const time15s = document.querySelector(".fifteen");
 
 time60s.addEventListener('click', showRaceTime);
 time30s.addEventListener('click', showRaceTime);
@@ -115,16 +123,16 @@ function showRaceTime() {
 
 
 function sortData(data, seconds) {
-    var sortedArray;
+    let sortedArray;
     switch(seconds) {
         case 60: 
-            sortedArray = data.sort((p1, p2) => (p1.points < p2.points) ? 1 : (p1.points > p2.points) ? -1 : 0); //sixty
+            sortedArray = data.sort((p1, p2) => (p1.score.score < p2.score.score) ? 1 : (p1.score.score > p2.score.score) ? -1 : 0); //sixty
             break;
         case 30:
-            sortedArray = data.sort((p1, p2) => (p1.points < p2.points) ? 1 : (p1.points > p2.points) ? -1 : 0); // thirty
+            sortedArray = data.sort((p1, p2) => (p1.score.score < p2.score.score) ? 1 : (p1.score.score > p2.score.score) ? -1 : 0); // thirty
             break;
         case 15:
-            sortedArray = data.sort((p1, p2) => (p1.points < p2.points) ? 1 : (p1.points > p2.points) ? -1 : 0); // fifteen
+            sortedArray = data.sort((p1, p2) => (p1.score.score < p2.score.score) ? 1 : (p1.score.score > p2.score.score) ? -1 : 0); // fifteen
             break;
     }
 
