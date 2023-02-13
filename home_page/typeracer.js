@@ -1,5 +1,6 @@
 import { signOut, auth, onAuthStateChanged, ref, set, onValue, db } from "../Create-AuthenticateUsers/API.js";
 
+//**Constants */
 const API_url = "http://api.quotable.io/random?minLength=200";
 const display = document.querySelector(".quote-display");
 const input = document.querySelector(".quote-input");
@@ -9,6 +10,7 @@ const sign_out = document.querySelector(".signout");
 const scoreboard = document.querySelector(".scoreboard");
 const container = document.querySelector(".container");
 
+//**Global Let */
 let startTime;
 let started = true;
 let timerID;
@@ -21,6 +23,23 @@ let clockTime;
 let is60 = false;
 let is30 = false;
 let is15 = false;
+
+//**Booting Page */
+
+
+//**Getting user data*/
+
+//**Setting up game modes */
+
+//**Switching Styles */
+
+//**Hding and showing componenets */
+
+//**Resetting */
+
+(function loadSelectedColours() {
+    
+})()
 
 nextQuote()
 input.addEventListener('input', () => {
