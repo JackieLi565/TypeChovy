@@ -15,6 +15,7 @@ TypeChovy is expected to include the following features:
 ### Leaderboards
 ![leaderboard](https://user-images.githubusercontent.com/102015496/218358597-6ae746c2-a9c8-43b2-8f7e-2c3822c2b708.jpg)
 ### Sign-in
+####(As of 14/02/23 creating accounts and GitHub signin will remain disabled)
 ![sign-in](https://user-images.githubusercontent.com/102015496/218359198-632bc524-aa3b-45af-a217-abe72e22cf4a.jpg)
 
 ## Report Bugs || Suggest tips
